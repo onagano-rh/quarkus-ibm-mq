@@ -10,7 +10,7 @@
     </parent>
     <groupId>io.quarkiverse.ibm.mq</groupId>
     <artifactId>quarkus-ibm-mq-parent</artifactId>
-    <version>999-SNAPSHOT</version>
+    <version>3.20.5</version>
     <packaging>pom</packaging>
     <name>Quarkus IBM MQ - Parent</name>
 
@@ -27,8 +27,8 @@
 
     <properties>
         <ibm.mq.version>9.4.5.0</ibm.mq.version>
-        <quarkus.version>3.30.3</quarkus.version>
-        <quarkus-ironjacamar.version>1.7.0</quarkus-ironjacamar.version>
+        <quarkus.version>3.20.5</quarkus.version>
+        <quarkus-ironjacamar.version>1.6.1</quarkus-ironjacamar.version>
     </properties>
 
     <dependencyManagement>

@@ -16,7 +16,7 @@ import com.ibm.msg.client.jakarta.wmq.factories.WMQComponent;
 import com.ibm.msg.client.jakarta.wmq.factories.WMQFactoryFactory;
 import com.ibm.msg.client.jakarta.wmq.factories.admin.WMQJmsFactory;
 
-import io.quarkus.deployment.IsProduction;
+import io.quarkus.deployment.IsNormal;
 import io.quarkus.deployment.annotations.BuildProducer;
 import io.quarkus.deployment.annotations.BuildStep;
 import io.quarkus.deployment.builditem.DevServicesResultBuildItem;
@@ -61,7 +61,7 @@ class IbmMqProcessor {
     }
 
     @SuppressWarnings("resource")
-    @BuildStep(onlyIfNot = IsProduction.class, onlyIf = { DevServicesConfig.Enabled.class,
+    @BuildStep(onlyIfNot = IsNormal.class, onlyIf = { DevServicesConfig.Enabled.class,
             IbmMqBuildTimeConfig.DevServicesConfig.Enabled.class })
     public DevServicesResultBuildItem createContainer(IbmMqBuildTimeConfig buildTimeConfig) {
         MQContainer container = new MQContainer(MQContainer.DEFAULT_IMAGE)
@@ -90,11 +90,9 @@ class IbmMqProcessor {
                 "ibm-mq.queue-manager", container.getQueueManager(),
                 "ibm-mq.webserver.port", String.valueOf(container.getWebServerPort()));
 
-        return DevServicesResultBuildItem.discovered()
-                .containerId(container.getContainerId())
-                .name("IBM MQ Dev Service")
-                .description("IBM MQ Container")
-                .config(configOverrides)
-                .build();
+        return new DevServicesResultBuildItem.RunningDevService(FEATURE,
+                container.getContainerId(),
+                container::close,
+                configOverrides).toBuildItem();
     }
 }

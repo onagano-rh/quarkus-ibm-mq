@@ -5,7 +5,7 @@
     <parent>
         <groupId>io.quarkiverse.ibm.mq</groupId>
         <artifactId>quarkus-ibm-mq-parent</artifactId>
-        <version>999-SNAPSHOT</version>
+        <version>3.20.5</version>
     </parent>
     <artifactId>quarkus-ibm-mq-deployment</artifactId>
     <name>Quarkus IBM MQ - Deployment</name>
